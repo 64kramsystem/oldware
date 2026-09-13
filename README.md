@@ -18,6 +18,7 @@ Oldware is a website featuring:
     - [Jet Set Willy](#jet-set-willy)
     - [Last Ninja Remix](#last-ninja-remix)
     - [The NeverEnding Story](#the-neverending-story)
+    - [PirateSlayer V2](#pirateslayer-v2)
   - [DOS-era videogames](#dos-era-videogames)
 
 ## DOS-era viruses
@@ -54,6 +55,10 @@ The [Alter Ego data-format reference](c64-games/alter_ego/remake/ALTER_EGO_DATA_
 ### The NeverEnding Story
 
 [Annotated listing](c64-games/neverending_story/neverending_story_full_listing.txt)
+
+### PirateSlayer V2
+
+The [annotated PirateSlayer V2 listing](c64-games/pirateslayer_v2/pirateslayer_v2_full_listing.txt) covers the protection chain used by *Lords of Conquest*, including its loading phases.
 
 ## DOS-era videogames
 
