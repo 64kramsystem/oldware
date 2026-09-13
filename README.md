@@ -14,6 +14,7 @@ Oldware is a website featuring:
     - [Whale](#whale)
   - [Commodore 64 videogames](#commodore-64-videogames)
     - [Alter Ego](#alter-ego)
+    - [Castle Master](#castle-master)
   - [DOS-era videogames](#dos-era-videogames)
 
 ## DOS-era viruses
@@ -34,6 +35,10 @@ These annotated disassemblies include analyses of the games' code, data and beha
 [Annotated listing](c64-games/alter_ego/alter_ego_full_listing.txt)
 
 The [Alter Ego data-format reference](c64-games/alter_ego/remake/ALTER_EGO_DATA_FORMATS.md) documents the narrative formats, compression, interaction descriptors, save state, questionnaire and interchange formats for a remake. Paths to inputs, extraction tools and interchange data in the reference refer to the original Commodware workspace.
+
+### Castle Master
+
+[Annotated listing](c64-games/castle_master/castle_master_full_listing.txt)
 
 ## DOS-era videogames
 
