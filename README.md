@@ -12,6 +12,8 @@ Oldware is a website featuring:
   - [Table of contents](#table-of-contents)
   - [DOS-era viruses](#dos-era-viruses)
     - [Whale](#whale)
+  - [Commodore 64 videogames](#commodore-64-videogames)
+    - [Alter Ego](#alter-ego)
   - [DOS-era videogames](#dos-era-videogames)
 
 ## DOS-era viruses
@@ -22,6 +24,16 @@ Virus.DOS.Whale, also known as Mother Fish and Z the Whale:
 
 - [Disassembly](dos-viruses/whale/listings/Virus.DOS.Whale.asm)
 - [Extensive analysis](dos-viruses/whale/analyses/Virus.DOS.Whale.md) of its techniques, payloads and historical context, with links to the disassembly and contemporary references.
+
+## Commodore 64 videogames
+
+These annotated disassemblies include analyses of the games' code, data and behavior, imported from Commodware.
+
+### Alter Ego
+
+[Annotated listing](c64-games/alter_ego/alter_ego_full_listing.txt)
+
+The [Alter Ego data-format reference](c64-games/alter_ego/remake/ALTER_EGO_DATA_FORMATS.md) documents the narrative formats, compression, interaction descriptors, save state, questionnaire and interchange formats for a remake. Paths to inputs, extraction tools and interchange data in the reference refer to the original Commodware workspace.
 
 ## DOS-era videogames
 
