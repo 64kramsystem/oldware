@@ -16,6 +16,7 @@ Oldware is a website featuring:
     - [Alter Ego](#alter-ego)
     - [Castle Master](#castle-master)
     - [Jet Set Willy](#jet-set-willy)
+    - [Last Ninja Remix](#last-ninja-remix)
   - [DOS-era videogames](#dos-era-videogames)
 
 ## DOS-era viruses
@@ -44,6 +45,10 @@ The [Alter Ego data-format reference](c64-games/alter_ego/remake/ALTER_EGO_DATA_
 ### Jet Set Willy
 
 [Annotated listing](c64-games/jet_set_willy/jet_set_willy_full_listing.txt)
+
+### Last Ninja Remix
+
+[Annotated listing](c64-games/last_ninja_remix/last_ninja_remix_full_listing.txt)
 
 ## DOS-era videogames
 
