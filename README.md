@@ -17,6 +17,7 @@ Oldware is a website featuring:
     - [Castle Master](#castle-master)
     - [Jet Set Willy](#jet-set-willy)
     - [Last Ninja Remix](#last-ninja-remix)
+    - [The NeverEnding Story](#the-neverending-story)
   - [DOS-era videogames](#dos-era-videogames)
 
 ## DOS-era viruses
@@ -49,6 +50,10 @@ The [Alter Ego data-format reference](c64-games/alter_ego/remake/ALTER_EGO_DATA_
 ### Last Ninja Remix
 
 [Annotated listing](c64-games/last_ninja_remix/last_ninja_remix_full_listing.txt)
+
+### The NeverEnding Story
+
+[Annotated listing](c64-games/neverending_story/neverending_story_full_listing.txt)
 
 ## DOS-era videogames
 
