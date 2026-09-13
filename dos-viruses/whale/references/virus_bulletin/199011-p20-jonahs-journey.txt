@@ -1,0 +1,68 @@
+Jonah’s Journey
+Virus Bulletin, 1990-11
+Section: ADDENDUM
+Source: 199011.pdf, pages 20–20
+
+[Page 20]
+
+itself before it can return to its own depths and continue
+ADDENDUM                                                                               processing the file infection subroutine.
+
+                                                   Dr. Peter Lammer                    WHALE does not appear at present to do anything more
+                                                                                       significant than replicate, occasionally displaying fish-related
+                                                                                       messages. In addition to the Piscean activation dates reported
+Jonah’s Journey                                                                        on page 19, currently available copies contain a trigger date of
+                                                                                       1st April 1991, after which no replication will take place. One
+The parasitic virus WHALE is not only the bulkiest but also                            of WHALE’s confusion tactics is that on approximately one in
+the most convoluted specimen seen to date. WHALE uses                                  ten infections, it appends a randomly chosen amount of
+several techniques to make itself not only difficult to find using                     garbage, up to 4 kilobytes, to the target file. Due to the way the
+anti-virus software, but also difficult to disassemble and                             virus is written, it is possible for files with extensions other
+analyse. However, disassembly is still a relatively straightfor-                       than EXE and COM to become ‘infected’, exactly as described
+ward process using DEBUG and the virus has now been                                    for 4K on page 5. This means that WHALE could inadvertantly
+disassembled in full.                                                                  have damaging effects on certain data or text files.
+
+WHALE includes several different anti-tamper measures. The                             Another sign of sloppy programming is that when the virus
+‘active’ obstacles range from disabling of the keyboard to                             ‘forges’ the lengths and time-stamps of files, it fails to
+exercising the single-step and breakpoint interrupts as an                             distinguish between those which are genuinely infected and
+integral part of the code. The ‘passive’ traps include deeply                          those which happened by chance to have a time-stamp ‘hours’
+buried routines which use checksums on the ROM BIOS data                               value larger than 15. If any file has a time-stamp hours value of
+area and on WHALE’s own code to detect any use of                                      16 or more, WHALE will subtract 16 from this value (for
+debuggers and breakpoints. If any sign of interference is found,                       example when a DIR command is processed), regardless even
+WHALE attempts to erase itself from memory: a demure virus,                            of whether the file is a program, let alone whether it is
+which would die rather than be molested.                                               genuinely infected. If the file is of type COM or EXE, WHALE
+                                                                                       also subtracts 9216 from the reported length, again regardless
+After removing some outer layers of active protection, one can                         of whether the file genuinely has been infected. On infecting a
+disassemble the entire contents of the virus with relative ease,                       file, furthermore, WHALE sets the top bit of the hours field
+by invoking WHALE’s own decryption routines in a controlled                            high without checking whether this would set the value to
+manner from DEBUG.                                                                     greater than 23 hours.
+Many of the rumours regarding this virus are unfounded,                                An interesting aspect of WHALE’s programming is that one
+including the claim that the virus was undetectable using                              piece of self-modifying code makes the execution flow of
+conventional methods. While WHALE is distinctly slippery to                            identical copies of the virus vary from one processor to
+detect in memory, due to the constant application of random-                           another. This depends on the length of the instruction queue.
+key de/re-cryption methods, it is relatively straightforward to                        The sequence is shown here in simplified form as:
+find in executable files.
+                                                                                                  mov            bx, offset retpt
+When WHALE infects a file, it first makes a 1-in-2 random                                         mov            al,c3          ;opcode for 'ret'
+choice whether or not to mutate and if appropriate then chooses                                   mov            cs:[bx],al
+one of its 30 possible mutations at random. Otherwise the virus                                   add            ax,020C
+replicates without mutating. Even when WHALE does not                                      retpt: int            3
+mutate, the virus constantly changes in appearance due to
+                                                                                       It does not follow the same execution path on an 8088-based
+decrypt/recrypt routines in its code.
+                                                                                       PC as on an 8086 based one; the 8088 chip has a 4-byte
+On disassembling WHALE’s file infection routine one is                                 instruction queue, whereas the 8086 has a 6-byte queue. On an
+reminded irresistibly of the legendary bird of paradise which,                         8086 the ‘INT 3H’ instruction will already be in the queue
+when attacked, flies in ever-decreasing circles until it disap-                        before it is modified to read ‘RET’, and will therefore execute
+pears up its own fundament - from which position of safe                               as ‘INT 3H’. On an 8088, by contrast, the instruction will be
+refuge it is said to bombard its pursuers with abuse and                               modified before entering the queue and will therefore execute
+excrement. WHALE performs a similar contortionist’s act in                             as ‘RET’. It is unlikely that the author of the virus was aware
+memory in order to append itself to a COM or EXE file on the                           of this particular feature of his code.
+disk; it re-modifies all of its self-modifying code, mutates
+                                                                                       All in all, it is improbable that WHALE will pose a practical
+itself in memory and re-applies all of its various layers of
+                                                                                       threat as a virus; it is too large and slows down performance of
+encryption until, poised in an impossibly precarious position, it
+                                                                                       any PC much too noticeably to spread undetected. It is also
+carries out a prearranged INT 21H function call to infect the
+                                                                                       relatively easy to detect using normal methods.
+target file. It then has to use its new mutated code to decrypt

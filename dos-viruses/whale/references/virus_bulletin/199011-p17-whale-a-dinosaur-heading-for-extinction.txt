@@ -1,0 +1,194 @@
+WHALE - A Dinosaur Heading for Extinction
+Virus Bulletin, 1990-11
+Section: VIRUS ANALYSIS
+Source: 199011.pdf, pages 17–19
+
+[Page 17]
+
+deliberate disinformation and confusion techniques noted in
+VIRUS ANALYSIS                                                                         FISH6 and WHALE. It is certainly appropriate in the case of
+                                                                                       WHALE since the “armour” outweighs the “stealth”!
+                                                              Jim Bates
+                                                                                       The WHALE virus is characterised by large sections of code
+                                                                                       (estimated as at least 50 percent of the total) which involve
+                                                                                       extremely convoluted processing around and across the debug
+WHALE...                                                                               and single step interrupt handlers and accessing such hardware
+A Dinosaur Heading For Extinction                                                      as the Programmable Interrupt Controller. There is no other
+                                                                                       reason for this than to confuse researchers trying to disassem-
+By far the largest virus that researchers have yet seen was                            ble the code.
+recently uploaded to a bulletin board in the United States and
+comprises just under 10K of code.                                                      Paradoxically, the presence of this ‘confusion’ code has caused
+                                                                                       the research community to heave a sigh of relief. The reason
+The virus has been called THE WHALE since that is the                                  for this is quite simply that such code is costly in processing
+“title” which appears within the code after the first level of                         time and when a machine becomes infected, processing speed
+code decryption has been executed. Disassembling this code                             slows by up to 50 percent - the WHALE is simply carrying so
+has proven time-consuming and full analysis is incomplete due                          much programming weight (armour) that its very bulk is its
+to the pressures of other work on the various researchers                              giveaway. (Rather like the dinosaurs, such viruses seem
+currently disassembling it. I am indebted to Dr. Peter Lammer                          doomed to extinction, Ed.)
+of Sophos and Morgan and Igor of MacAfee Associates for
+access to their work on this and the report which follows                              A substantial amount of time and effort has been expended in
+collates results from all these sources although any errors in                         writing this virus and it could well have been undertaken by
+analysis or interpretation are entirely my own.                                        more than one author. Program construction is modular and no
+                                                                                       effort has been spared to make the code difficult for scanning
+                                                                                       programs to detect.
+The FidoNet Message
+Before describing the code in such detail as we have, mention
+should be made of the “motherfish” message which was
+posted anonymously to VIRUS ECHO on FidoNet and reported
+in full in last month’s Virus Bulletin.
+
+There are several discrepancies in this message which might
+                                                                                       ‘‘Virus authors have at last reached
+suggest that the sender was either not familiar with the code or                         the predicted point at which their
+he was spreading disinformation. Since more than half the
+virus code is concerned with confusing and misinforming                                      code has to carry so much
+anyone trying to disassemble it, I incline to the latter theory.
+                                                                                         protection that the parameters of
+The use of “motherfish” (which does not appear in the code)
+in preference to “whale” is strange, and the reference to the                             invisibility and mobility can no
+virus “learning” detection methods and being a “living,
+breathing entity” is fanciful in the extreme and inaccurate.
+                                                                                              longer be maintained.’’
+That “the virus cannot be detected by present methods” is
+incorrect, despite concerted attempts on the part of the
+author(s) to make the virus undetectable. The use of the word
+“disavow” is interesting since text within the code suggests                           Encryption Routines
+that the author comes from Hamburg where such a word seems
+unlikely to be common parlance. However, the suggestion that                           Aside from the now accepted technique of self-encryption, this
+the code is modularly constructed is accurate, so unless this                          virus scrambles the order of its subroutines and varies the
+was a guess we must assume that the sender has some knowl-                             encryption algorithm used during file infection.
+edge of the virus as a whole.                                                          Also accepted as a “standard” technique now is the decryp-
+                                                                                       tion/recryption process which is used to prevent detection of
+Heavyweight Confusion Coding                                                           the virus code in memory. This technique consists of maintain-
+                                                                                       ing most of the resident virus code in memory in encrypted
+Following self-encrypting and “stealth” viruses, a new term
+                                                                                       form and only decrypting it just prior to processing. Once a
+has been coined by a member of the Computer Crime Unit at
+                                                                                       particular section has been executed a re-encryption routine is
+New Scotland Yard. “Armoured” virus code describes the
+                                                                                       called which collects a new pseudo-random key value and re-
+
+[Page 18]
+
+encrypts the code just executed before storing the new key and                         long before detection and would therefore not spread too far.
+continuing to the next part of the code. The result is that only a
+small “window” around the code currently being executed is                             One of the checks for infection seems to be that the hour field
+actually “in plain view”, the remainder is variously and                               in the file time must be equal to or greater than 16 (i.e. 4pm or
+randomly encrypted. This is obviously to forestall the possibil-                       later) since the top bit of that field is modified within the
+ity of a recognition pattern being used to identify virus code in                      Function 57H (Get/Set file Date/Time) handler. This too may
+memory. The author(s) obviously likes this technique since it                          limit the number of files suitable for infection.
+is used at least 96 times throughout the code. This is another
+part of the bulk that this unwieldy virus carries.                                     Programming Style
+As with other recent viruses, there are several “undocu-                               There are several similarities with the FISH6 and 4K viruses
+mented” system calls (most of which are now well docu-                                 and this might indicate either a distinct development cycle by
+mented within the technical community) but two have been                               the author(s) or simply that someone has copied useful code
+noted which may relate to specific software packages, possibly                         and ideas from the earlier specimens. I incline to the former
+of an anti-virus nature.                                                               view but whatever the truth of the matter, the similarity in file
+                                                                                       infection technique provides a useful method of identifying the
+                                                                                       presence of any of these three viruses.
+General Structure
+There is still much work to be done in analysing this code.                            However, it is reported from the United States that some
+However, we can say that this is a parasitic virus which infects                       generations of WHALE may not display this similarity and
+executables with an infection length of around 9416 bytes. The                         might therefore slip through this particular detection net.
+actual appended length varies from infection to infection and
+                                                                                       The technique itself is discussed in the 4K data infection report
+this is probably due to the insertion of some random junk and
+                                                                                       on page 4 of this issue and with the exception of the differ-
+alignment of code on paragraph boundaries.
+                                                                                       ences in infected length (and the as yet unconfirmed U.S.
+No simple search pattern is possible because of the multiple                           reports), all three viruses show identical repetition of the
+encryption techniques and modular scrambling. There are                                original host header information.
+considerable sections of self-modifying, self-checking and self-
+switching code within WHALE. This last technique consists of                           Generation Code
+laboriously switching individual bytes within a specific
+subroutine using pre-calculated XOR values. The result is a                            The external results of running the WHALE have so far
+sort of global XOR effect which can be used to switch between                          produced at least 27 different “generations” (the total number
+two different routines or as a decrypt/recrypt process.                                of possible generations equals 30. Ed.) and each generation
+                                                                                       appears to be the result of scrambling the order in which
+The code appears to install itself as resident within the first                        subroutines are written to the target file as well as changing
+available Memory Control Block and monitors system activity                            both the encryption ‘lock’ and ‘key’.
+during normal DOS processing.
+                                                                                       There is a counting mechanism fairly close to the beginning of
+Stealth techniques are used to fool DOS into reporting original                        the virus code which counts back from 0F0H (240 decimal) on
+file sizes rather than the increased ones when files become                            the dissection copy but the significance of this has not yet
+infected. This is done by intercepting the DOS Get File Size                           become clear. Possibly sections of the virus yet to be dissected
+function (23H) and checking whether the target file is infected                        may be invoked when the counter reaches zero.
+before returning either a true or modified file size to the calling
+routine. (See also page 20.)                                                           Infection apparently takes place during a Function 4BH call to
+                                                                                       DOS (Load and Execute) and thus affects COM, EXE, OVR
+                                                                                       and other executable code which is run in this way.
+Infection Method
+                                                                                       At various times, the interrupt vector addresses for Interrupts
+The virus’ method of detecting infection is still being analysed                       1H, 2H, 3H, 9H, 13H, 24H and 2FH are accessed and may be
+but there is some evidence that several checks are made,                               modified for use by the virus code.
+failure of any one of which will indicate that a file is not
+infected.                                                                              The main area of code subversion centres around the DOS
+                                                                                       Interrupt 21H and this is intercepted and passed through a
+The complexity of these checks means that a “sparse infec-                             function dispatcher routine. This dispatcher monitors 15
+tion” method (i.e. not all files will be infected) may be                              separate DOS functions including both types of Find First/Next
+employed. This makes external detection more difficult but it                          (11H, 12H, 4EH and 4FH), Open and Close file operations
+does reduce the virulence of the code and should mean that if                          (0FH, 3DH and 3EH) and various types of File Read and Seek
+this specimen does appear in the wild, it is unlikely to exist for
+
+[Page 19]
+
+calls (14H, 21H, 27H and 42H). Other functions handled are                             The message reads:
+Get File Size (23H), Load and Execute (4BH) and Get/Set
+Date/Time (57H). As is now expected of this type of code, the                             THE WHALE IN SEARCH OF THE 8 FISH
+                                                                                          I AM '~knzyvo}' IN HAMBURG
+DOS Critical Error vector is hooked during virus operation and
+appears to be correctly restored after use.                                            This is exactly as the message appears on screen and the
+                                                                                       characters between the single quotes appear to be a name of
+                                                                                       some sort.
+
+                                                                                       Elementary cryptanalysis suggests that this name is probably
+                                                                                       ‘TADPOLES’ (which ties in with the ichthyological theme)
+‘‘The Computer Crime Unit at New                                                       since this results from simply subtracting a value of 42
+                                                                                       (decimal) from each character value. Whether the authors
+  Scotland Yard is now building a                                                      actually do come from Hamburg (Chaos Computer Club? Ed.)
+                                                                                       is not certain: since they are capable of producing this ludi-
+dossier on computer virus incidents                                                    crously silly code it is quite probable that they are pathological
+                                                                                       liars as well.
+and will seek to extradite any virus
+                                                                                       Many researchers have conjectured that WHALE might be
+writer who causes damage to data,                                                      designed to interact with other viruses (notably FISH6) but to
+                                                                                       date, no evidence of this has been found either within the virus
+   programs or processors in the                                                       code or by live testing with both viruses active on the same
+         United Kingdom.’’                                                             processor.
+
+                                                                                       Possible Motives for the Virus
+                                                                                       As knowledge currently stands on this virus, it may well be an
+Text Strings                                                                           extremely childish and malicious attempt to waste the time of
+As various layers of encryption are peeled back, two areas of                          virus researchers across the world. In rather the same way that
+plain text are revealed. The first of these is written to a hidden                     the fire brigade can never ignore false alarms, the research
+file in the root directory of the C: drive on a 1-in-4 random                          community cannot ignore even the simplest virus code.
+chance. This file is named FISH- 9.TBL and contains a copy of
+                                                                                       Any virus code is potentially destructive and the perpetrators
+the boot sector of the drive, together with the following plain
+                                                                                       should be aware that the Computer Crime Unit at New
+text:
+                                                                                       Scotland Yard is now building a dossier of computer virus
+  FISH VIRUS 9 A Whale is no Fish! Mind her Mutant                                     incidents in the UK and will seek the extradition and prosecu-
+  Fish and the hidden Fish Eggs for they are                                           tion of any virus writer who causes damage to data, programs
+  damaging. The sixth Fish mutates only if the Whale                                   or processing equipment within the United Kingdom. Under
+  is in her Cave.                                                                      current legislation, conviction could carry a maximum five year
+                                                                                       prison sentence*. If ‘TADPOLES’ reads this, he/they might
+No other reference is made to this file from within the virus                          like to reflect on such a sentence.
+code. The content indicates a juvenile mind at work.
+                                                                                       The arrival of this virus caused initial consternation among
+The “sixth Fish” may refer to the FISH6 virus (and establish                           knowledgeable researchers but preliminary examination has
+another definite link) but this has yet to be established. Since I                     dispelled most of this concern. It is interesting to speculate that
+haven’t yet disassembled FISH6, I would be interested to know                          in the WHALE, virus writers have at last reached a predicted
+just how it got its name (why the ‘6’ ?). It is also interesting to                    point where their code has to carry so much protection that the
+note that TBL is one of the data file extensions attacked by the                       original parameters of invisibility and mobility can no longer
+4K virus (see pages 4 - 5 and 20).                                                     be maintained with any reliability. Such bulky and processor
+                                                                                       intensive code will generally reveal itself long before any
+The second plain text section is displayed as a screen message
+                                                                                       payload can be delivered.
+if the system date is between 19th February and 20th March
+(consistent with the astrological star sign of Pisces the fish.                        Work will continue on disassembling and analysing this virus
+Ed.) in any year except 1991. Subsequently the system hangs                            until all the fine details are known and further reports will
+with a Divide Overflow message, necessitating a power down                             appear as more information becomes available.
+reboot. This is the only trigger point noted so far but there is a
+possibility that even these dates may be modified within                               *Under the provisions of the United Kingdom Computer Misuse
+differing generations, resulting in unpredictable trigger dates.                       Act, 29th August, 1990. Ed.
